@@ -101,5 +101,5 @@ MODEL_DIR.mkdir(parents=True, exist_ok=True)
 with open(MODEL_PATH, 'wb') as f:
     pickle.dump(model_data, f)
 
-print(f"\n✅ Modelo guardado en {MODEL_PATH}")
+print(f"\n[OK] Modelo guardado en {MODEL_PATH}")
 print(f"   Tamaño del archivo: {MODEL_PATH.stat().st_size / 1024:.1f} KB")
