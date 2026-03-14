@@ -77,3 +77,76 @@
   opacity: 0.5;
   cursor: not-allowed;
 }
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.badgeMale {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.badgeFemale {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.badgeLunchStandard {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.badgeLunchFree {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.badgePrepCompleted {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.badgePrepNone {
+  background: #e5e7eb;
+  color: #4b5563;
+}
+
+.badgeResultPass {
+  background: #bbf7d0;
+  color: #166534;
+  font-weight: 600;
+}
+
+.badgeResultFail {
+  background: #fee2e2;
+  color: #b91c1c;
+  font-weight: 600;
+}
+
+.scoreCell {
+  min-width: 90px;
+}
+
+.scoreValue {
+  font-size: 0.8rem;
+  margin-bottom: 0.2rem;
+}
+
+.scoreBarOuter {
+  width: 100%;
+  height: 3px;
+  border-radius: 2px;
+  background: #e5e7eb;
+}
+
+.scoreBarInner {
+  height: 100%;
+  border-radius: 2px;
+  background: var(--color-primary);
+}

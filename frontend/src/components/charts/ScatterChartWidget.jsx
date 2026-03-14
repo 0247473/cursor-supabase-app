@@ -1,12 +1,24 @@
 /**
  * ScatterChartWidget - Reusable scatter plot.
  * To use: pass your data array and specify which keys map to the X and Y axes.
- * Props: data, xKey, yKey, title, color, height
+ * Props:
+ * - data, xKey, yKey, title, color, height
+ * - categoryKey: optional string to color points by category
+ * - series: optional array [{ value, color, name }] when using categoryKey
  */
-import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
+import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts'
 import LoadingSpinner from '../ui/LoadingSpinner'
 
-export default function ScatterChartWidget({ data, xKey, yKey, title, color = '#6366f1', height = 300 }) {
+export default function ScatterChartWidget({
+  data,
+  xKey,
+  yKey,
+  title,
+  color = '#6366f1',
+  height = 300,
+  categoryKey,
+  series,
+}) {
   if (!data || !Array.isArray(data) || data.length === 0) {
     return (
       <div style={{ height, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -15,7 +27,13 @@ export default function ScatterChartWidget({ data, xKey, yKey, title, color = '#
     )
   }
 
-  const plotData = data.map((row) => ({ x: row[xKey], y: row[yKey], ...row }))
+  const hasCategories = categoryKey && Array.isArray(series) && series.length > 0
+  const plotData = data.map((row) => ({
+    x: row[xKey],
+    y: row[yKey],
+    ...(categoryKey ? { [categoryKey]: row[categoryKey] } : {}),
+    ...row,
+  }))
 
   return (
     <div>
@@ -26,7 +44,21 @@ export default function ScatterChartWidget({ data, xKey, yKey, title, color = '#
           <XAxis dataKey="x" name={xKey} />
           <YAxis dataKey="y" name={yKey} />
           <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-          <Scatter data={plotData} fill={color} />
+          {hasCategories ? (
+            <>
+              {series.map((s) => (
+                <Scatter
+                  key={s.value}
+                  data={plotData.filter((row) => row[categoryKey] === s.value)}
+                  fill={s.color || color}
+                  name={s.name || String(s.value)}
+                />
+              ))}
+              <Legend />
+            </>
+          ) : (
+            <Scatter data={plotData} fill={color} />
+          )}
         </ScatterChart>
       </ResponsiveContainer>
     </div>

@@ -16,8 +16,8 @@ export default function App() {
       <main style={{ padding: '1.5rem', maxWidth: 1400, margin: '0 auto' }}>
         <Routes>
           <Route path="/" element={<Dashboard />} />
-          <Route path="/data" element={<DataExplorer />} />
-          <Route path="/predict" element={<Predictor />} />
+          <Route path="/explorer" element={<DataExplorer />} />
+          <Route path="/predictor" element={<Predictor />} />
         </Routes>
       </main>
     </BrowserRouter>

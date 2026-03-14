@@ -19,7 +19,7 @@ export async function predict(inputData) {
     const res = await fetch(`${BASE_URL}/predict`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ features: inputData }),
+      body: JSON.stringify(inputData),
     })
 
     if (!res.ok) {
